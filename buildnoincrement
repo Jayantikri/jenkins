@@ -1,0 +1,6 @@
+cd /var/jenkins_home/workspace/job1/xyz/
+ls
+touch hello.txt
+echo "Build number: $BUILD_NUMBER"
+echo "This is build no:$BUILD_NUMBER " >>hello.txt
+cat hello.txt
