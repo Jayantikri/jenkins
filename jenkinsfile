@@ -9,7 +9,6 @@ pipeline{
             }
         }
     }
-    agent { dockerfile true }
     stages {
         stage('build') {
             steps {
@@ -19,7 +18,7 @@ pipeline{
         }
         stage('run'){
             steps{
-                docker.image('jaya91/web:1.$BUILD_NUMBER').withRun('-p 3306:3306') 
+                docker.image('jaya91/web:1.$BUILD_NUMBER').withRun('-p 2233:80') 
                 docker.withRegistry('https://hub.docker.com/', 'dockerhub_cred') 
             }
         }
