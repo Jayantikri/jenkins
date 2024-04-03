@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        
+        stage('dir') {
+            steps {
+                sh 'mkdir cool'
+            }
+        }
+    }
+}
