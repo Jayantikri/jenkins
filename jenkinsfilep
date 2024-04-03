@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Jayantikri/jenkins.git'
+            }
+        }
+        
+        stage('build') {
+            agent { dockerfile true }
+            steps {
+                sh "docker build -t jaya91/web:1.${BUILD_NUMBER} ."
+                sh "docker images"
+            }
+        }
+        
+        stage('run') {
+            steps {
+                script {
+                    docker.image("jaya91/web:1.${BUILD_NUMBER}").withRun("-p 3306:3306")
+                }
+            }
+        }
+    }
+    
+    
