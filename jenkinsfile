@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        registry = "https://hub.docker.com/"
+        registry = "https://hub.docker.com/" // Removed extra '/'
         registryCredential = 'dockerhub_cred'
     }
     
@@ -13,15 +13,20 @@ pipeline {
             }
         }
         
-        stage('build and deploy') {
+        stage('build') {
             steps {
                 script {
-                    // Build Docker image
-                    sh "docker build -t jaya91/web:1.${BUILD_NUMBER} ."
-                    
+                    sh "docker build -t jaya91/web:1.${BUILD_NUMBER} ." // Corrected the variable interpolation syntax
+                    sh 'docker images'
+                }
+            }
+        }
+        
+        stage('Deploy our image') {
+            steps {
+                script {
                     // Push the Docker image to the registry
                     docker.withRegistry(registry, registryCredential) {
-                        dockerImage = docker.image("jaya91/web:1.${BUILD_NUMBER}")
                         dockerImage.push()
                     }
                     
