@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Jayantikri/jenkins.git'
                 sh 'ls ; pwd'
             }
         }
@@ -12,7 +11,7 @@ pipeline {
         stage('build') {
             agent any
             steps {
-                sh "docker build -t jaya91/web:1.${BUILD_NUMBER} ."
+                sh "docker build -t jaya91/web:1.0.${BUILD_NUMBER} ."
                 sh "docker images"
             }
         }
@@ -20,7 +19,7 @@ pipeline {
         stage('run') {
             steps {
                 script {
-                    docker.image("jaya91/web:1.${BUILD_NUMBER}").withRun("-p 2233:80")
+                    sh " docker rm file_web ; docker run -itd --name file_web -p 2233:80 jaya91/web:1.0.${BUILD_NUMBER}"
                 }
             }
         }
