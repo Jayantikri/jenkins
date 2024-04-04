@@ -1,11 +1,11 @@
-pipeline {
-    agent any
 pipeline{
+environment {
+registry = "https://hub.docker.com//jaya91"
+registryCredential = 'dockerhub_cred'
     agent any
     stages {
-        stage('clone') {
+        stage('pwd') {
             steps {
-                git branch: 'main', url: 'https://github.com/Jayantikri/jenkins.git'
                 sh 'ls ; pwd'
             }
         }
@@ -17,6 +17,11 @@ pipeline{
                 sh 'docker images'
             }
         }
+stage('Deploy our image') {
+steps{
+script {
+docker.withRegistry( '', registryCredential ) {
+dockerImage.push()
         stage('run'){
             steps{
                 docker.image('jaya91/web:1.$BUILD_NUMBER').withRun('-p 2233:80') 
