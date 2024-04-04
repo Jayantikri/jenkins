@@ -19,7 +19,7 @@ pipeline {
         stage('run') {
             steps {
                 script {
-                    sh " docker rm file_web ; docker run -itd --name file_web -p 2233:80 jaya91/web:1.0.${BUILD_NUMBER}"
+                    sh "docker rm -f file_web ; docker run -itd --name file_web -p 2233:80 jaya91/web:1.0.${BUILD_NUMBER}"
                 }
             }
         }
