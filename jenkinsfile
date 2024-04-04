@@ -1,34 +1,39 @@
-pipeline{
-environment {
-registry = "https://hub.docker.com//jaya91"
-registryCredential = 'dockerhub_cred'
+pipeline {
     agent any
+    
+    environment {
+        registry = "https://hub.docker.com/" 
+        registryCredential = 'dockerhub_cred'
+    }
+    
     stages {
         stage('pwd') {
             steps {
                 sh 'ls ; pwd'
             }
         }
-    }
-    stages {
+        
         stage('build') {
             steps {
-                sh 'docker build -t jaya91/web:1.$BUILD_NUMBER .'
-                sh 'docker images'
+                script {
+                    sh "docker build -t jaya91/web:1.${BUILD_NUMBER} ." 
+                    sh 'docker images'
+                }
             }
         }
-stage('Deploy our image') {
-steps{
-script {
-docker.withRegistry( '', registryCredential ) {
-dockerImage.push()
-        stage('run'){
-            steps{
-                docker.image('jaya91/web:1.$BUILD_NUMBER').withRun('-p 2233:80') 
-                docker.withRegistry('https://hub.docker.com/', 'dockerhub_cred') 
+        
+        stage('Deploy our image') {
+            steps {
+                script {
+                    // Push the Docker image to the registry
+                    docker.withRegistry(registry, registryCredential) {
+                        dockerImage.push()
+                    }
+                    
+                    // Run the Docker container
+                    docker.image("jaya91/web:1.${BUILD_NUMBER}").withRun('-p 2233:80')
+                }
             }
         }
-        }
-    
-}
+    }
 }
