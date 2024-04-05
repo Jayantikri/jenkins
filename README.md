@@ -4,7 +4,7 @@ docker run -itd -v v1:/var/jenkins_home --restart=on-failure /run/docker.sock:/r
  pass=8a350f1f7f1f43458277382bd691e439
 user =jaya
 
-##  execute shell code deploy commands
+## execute shell code deploy commands
 docker ps #to check docker is running or not
 cd   $JENKINS_HOME/workspace/code1/
 ls
