@@ -11,13 +11,6 @@ pipeline {
                 sh 'ls ; pwd'
             }
         }
-     stage('ignore readme.md commit') {
-        when {
-            expression {
-                // Check if only README.md is modified
-                return !fileExists('README.md') || changesetToIgnore('README.md')
-            }
-        }
 
             stage('build') {
             steps {
