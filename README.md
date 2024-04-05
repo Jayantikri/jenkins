@@ -15,3 +15,7 @@ docker images #to check image
 docker run -itd --name pk -p 1144:80  jaya91/apachej:1.0.0
 ##jenkins agent install command
 docker run -i -v /run/docker.sock:/run/docker.sock -v /usr/bin/docker:/bin/docker  --rm --name agent3  --init jenkins/agent java -jar /usr/share/jenkins/agent.jar
+## to ignore commits from README.md file 
+```
+configure the pipeline go to additional behaviour---> select ignore commit polling for cretain messages
+and write Update README.md
