@@ -11,12 +11,7 @@ pipeline {
                 sh 'ls ; pwd'
             }
         }
-Stage A:
-  stage: A
-  rules:
-    - changes:
-      - "README.md"
-      when: never
+
         
 
         stage('build') {
