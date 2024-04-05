@@ -17,4 +17,5 @@ docker run -itd --name pk -p 1144:80  jaya91/apachej:1.0.0
 docker run -i -v /run/docker.sock:/run/docker.sock -v /usr/bin/docker:/bin/docker  --rm --name agent3  --init jenkins/agent java -jar /usr/share/jenkins/agent.jar
 ## to ignore commits from README.md file 
 ```
-
+polling ignore commits in certain path
+excluded regions under Git additional behaviors. write README.md in this field
