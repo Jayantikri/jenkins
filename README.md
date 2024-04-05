@@ -6,7 +6,7 @@ user =jaya
 
 ##  execute shell code deploy commands
 docker ps #to check docker is running or not
-cd $JENKINS_HOME/workspace/code1/
+cd   $JENKINS_HOME/workspace/code1/
 ls
 ### to change directory for dockerfile
 docker build -t jaya91/apachej:1.0.0 .  #to build image
