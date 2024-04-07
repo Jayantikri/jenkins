@@ -19,3 +19,6 @@ docker run -i -v /run/docker.sock:/run/docker.sock -v /usr/bin/docker:/bin/docke
 ```
 polling ignore commits in certain path
 excluded regions under Git additional behaviors. write README.md in this field
+## to do git hub webhook trigger
+```
+first you need a public ip on which jenkins is running 
